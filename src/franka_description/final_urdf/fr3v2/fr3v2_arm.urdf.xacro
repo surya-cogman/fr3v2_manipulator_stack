@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fr3v2">
+
+
+    <xacro:include filename="$(find franka_description)/final_urdf/fr3v2/utility.xacro" />
+    <xacro:include filename="$(find franka_description)/final_urdf/gripper/franka_gripper.urdf.xacro"/>
+    
+
+    <xacro:property name="joint_limits" value="${xacro.load_yaml('$(find franka_description)/config/joint_limits.yaml')}"/>
+    <xacro:property name="inertials" value="${xacro.load_yaml('$(find franka_description)/config/inertials.yaml')}"/>
+    <xacro:property name="kinematics" value="${xacro.load_yaml('$(find franka_description)/config/kinematics.yaml')}"/>
+    <xacro:property name="dynamics" value="${xacro.load_yaml('$(find franka_description)/config/dynamics.yaml')}"/>
+
+    <link name="world"/>
+
+    <joint name="world_to_base" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    <!-- Fixed reference frame for robot mounting -->
+    <link name="base_link">
+    </link>
+
+    <!-- Fixed joint between world mounting frame and robot base -->
+    <joint name="base_to_link0"
+       type="fixed">
+        <parent link="base_link"/>
+        <child link="link0"/>
+        <origin xyz="0 0 0"
+                rpy="0 0 0"/>
+    </joint>
+    
+    <xacro:fr3-link name="link0"/>
+
+    <joint name="joint1" type="revolute">
+      <xacro:franka-kinematics name="joint1" config="${kinematics}" />
+      <parent link="link0" />
+      <child link="link1" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint1" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint1" config="${dynamics}" />
+    </joint>
+
+
+    <xacro:fr3-link name="link1"/>
+
+    <joint name="joint2" type="revolute">
+      <xacro:franka-kinematics name="joint2" config="${kinematics}" />
+      <parent link="link1" />
+      <child link="link2" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint2" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint2" config="${dynamics}" />
+    </joint>
+
+
+    <xacro:fr3-link name="link2"/>
+
+    <joint name="joint3" type="revolute">
+      <xacro:franka-kinematics name="joint3" config="${kinematics}" />
+      <parent link="link2" />
+      <child link="link3" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint3" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint3" config="${dynamics}" />
+    </joint>
+
+
+    <xacro:fr3-link name="link3"/>
+
+
+    <joint name="joint4" type="revolute">
+      <xacro:franka-kinematics name="joint4" config="${kinematics}" />
+      <parent link="link3" />
+      <child link="link4" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint4" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint4" config="${dynamics}" />
+    </joint>
+
+
+    <xacro:fr3-link name="link4"/>
+
+
+     <joint name="joint5" type="revolute">
+      <xacro:franka-kinematics name="joint5" config="${kinematics}" />
+      <parent link="link4" />
+      <child link="link5" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint5" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint5" config="${dynamics}" />
+    </joint>
+
+
+    <xacro:fr3-link name="link5"/>
+
+
+    <joint name="joint6" type="revolute">
+      <xacro:franka-kinematics name="joint6" config="${kinematics}" />
+      <parent link="link5" />
+      <child link="link6" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint6" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint6" config="${dynamics}" />
+    </joint>
+
+    <xacro:fr3-link name="link6"/>
+
+    <joint name="joint7" type="revolute">
+      <xacro:franka-kinematics name="joint7" config="${kinematics}" />
+      <parent link="link6"/>
+      <child link="link7"/>
+      <axis xyz="0 0 1"/>
+      <xacro:franka-limits name="joint7" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint7" config="${dynamics}" />
+    </joint>
+
+    <xacro:fr3-link name="link7"/>
+    <link name="link8"/>
+
+    <joint name="joint8" type="fixed">
+    <xacro:franka-kinematics name="joint8" config="${kinematics}" />
+      <parent link="link7" />
+      <child link="link8" />
+    </joint>
+
+    <xacro:franka_hand/>
+    
+
+</robot>

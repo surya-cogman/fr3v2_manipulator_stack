@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fr3v2">
+
+ <xacro:include filename="$(find franka_description)/final_urdf/fr3v2/fr3v2_arm.urdf.xacro" />
+ 
+ <xacro:include filename="$(find franka_description)/final_urdf/fr3v2/fr3v2.gazebo.xacro" />
+ 
+</robot>

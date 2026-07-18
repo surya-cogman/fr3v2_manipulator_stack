@@ -1,0 +1,22 @@
+<launch>
+
+    <let name="urdf_path" value="$(find-pkg-share franka_description)/final_urdf/fr3v2/fr3v2.urdf.xacro" />
+    
+
+     #ros2 run robot_state_publisher robot_state_publisher 
+     # --ros-args -p robot_description:="$(xacro $(ros2 pkg prefix darm_description)/share/darm_description/urdf/darm.urdf.xacro)"
+
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher">
+        <param name="robot_description" value="$(command 'xacro $(var urdf_path)')" />
+    </node>
+
+
+    <node pkg="joint_state_publisher_gui"  exec="joint_state_publisher_gui" />
+
+    <node pkg="rviz2"  exec="rviz2" output="screen" />
+    # ros2 run rviz2 rviz2 -d $(ros2 pkg prefix darm_description)/share/darm_description/rviz/urdf_config.rviz
+
+
+
+</launch>
