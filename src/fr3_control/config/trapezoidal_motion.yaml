@@ -1,0 +1,7 @@
+trapezoidal_motion:
+  ros__parameters:
+    motion: "time"
+    total_time: 1.0
+    Vmax: 0.5
+    Amax: 1.0
+    final_joint_angles: [-1.57, 0.0, 0.0, -0.35, 0.0, 1.57, 1.57]
