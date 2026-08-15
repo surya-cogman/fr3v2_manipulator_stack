@@ -1,0 +1,47 @@
+<launch>
+
+    <arg name="use_sim_time" default="true"/>
+
+    <!-- PATHS -->
+    <let name="urdf_path" value="$(find-pkg-share franka_description)/moveit_urdf/fr3v2_arm.urdf.xacro"/>
+    <let name="rviz_path" value="$(find-pkg-share fr3_bringup)/config/rviz_config.rviz"/>
+    
+
+
+    <!-- ##### robot_state_publisher ###########-->
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" >
+        <param name="robot_description" value="$(command 'xacro $(var urdf_path)')"/>
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+
+    </node>
+
+    <!-- controllers -->
+
+    <node pkg="controller_manager" exec="ros2_control_node">
+        <param from="$(find-pkg-share fr3_bringup)/config/ros2_controllers.yaml"/>
+
+    </node>
+    
+
+    <node pkg= "controller_manager" exec="spawner"
+        args="joint_state_broadcaster --controller-manager /controller_manager"/>
+
+    <node pkg= "controller_manager" exec="spawner"
+        args="arm_links_controller --controller-manager /controller_manager"/>
+
+    <node pkg= "controller_manager" exec="spawner"
+        args="gripper_links_controller --controller-manager /controller_manager"/>
+
+
+
+    <!-- move_group_moveit -->
+
+    <include file="$(find-pkg-share fr3_moveit_config)/launch/move_group.launch.py" />
+
+    <!-- RViz -->
+    <node pkg="rviz2"
+            exec="rviz2"
+            args="-d $(var rviz_path)"
+            output="screen"/>
+
+</launch>
