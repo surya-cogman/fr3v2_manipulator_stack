@@ -28,6 +28,7 @@ endif()
 rosidl_generate_interfaces(${PROJECT_NAME}
 "msg/JointStatus.msg"
 "msg/JointCommand.msg"
+"msg/JointCmdMoveIt.msg"
 )
 
 ament_export_dependencies(rosidl_default_runtime)
