@@ -38,4 +38,25 @@ fr3_interfaces
 )
 install(TARGETS joints_target
 DESTINATION lib/${PROJECT_NAME}/)
+
+
+
+
+add_executable(pose_target src/pose_target)
+ament_target_dependencies(pose_target
+rclcpp
+moveit_ros_planning_interface
+fr3_interfaces
+)
+install(
+  TARGETS pose_target
+  DESTINATION lib/${PROJECT_NAME}/
+)
+
+
+
+
+
+
+
 ament_package()

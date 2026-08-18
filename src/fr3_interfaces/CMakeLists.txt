@@ -26,8 +26,7 @@ endif()
 
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-"msg/JointStatus.msg"
-"msg/JointCommand.msg"
+"msg/PoseTargetMoveIt.msg"
 "msg/JointCmdMoveIt.msg"
 )
 

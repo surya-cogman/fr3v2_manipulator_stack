@@ -43,8 +43,6 @@ private:
         }
     }
 
-    
-
     void jointCallback(const JointCmdMoveIt &msg)
     {
         if (msg.arm_joints.size() == 7)
